@@ -1,0 +1,40 @@
+function apartmentHunting(blocks, reqs) {
+  // Write your code here.
+  let optimalIndex = 0;
+  let minDistance = Infinity;
+  for (let i = 0; i < blocks.length; i++) {
+    let maxDistance = 0;
+    for (let j = 0; j < blocks.length; j++) {
+      if (reqs.some(req => blocks[j][req])) {
+        let distance = Math.abs(i - j);
+        maxDistance = Math.max(maxDistance, distance);
+      }
+    }
+    if (maxDistance < minDistance) {
+      minDistance = maxDistance;
+      optimalIndex = i;
+    }
+  }
+  return optimalIndex;
+}
+
+module.exports = { apartmentHunting };
+}
+
+// Do not edit the line below.
+exports.apartmentHunting = apartmentHunting;
+
+
+
+explaination:
+
+The apartmentHunting function takes in two parameters: a list of blocks (called blocks) and a list of required buildings (called reqs). It returns the index of the block that is most optimal for the user (the block that minimizes the farthest distance required to reach any of the required buildings).
+
+The function first initializes two variables: optimalIndex to 0 and minDistance to Infinity. These variables will be used to store the index and minimum distance of the optimal block, respectively.
+
+Next, the function has a loop that iterates through each block in the blocks list. For each block, it has another loop that iterates through each block in the blocks list again. This nested loop checks if any of the required buildings are present at the current block being considered (using the some method and a lambda function). If a required building is present, it calculates the distance from the outer loop's block to the inner loop's block (using the abs function) and updates the maxDistance variable if the distance is greater than the current value of maxDistance.
+
+After the inner loop finishes, the function checks if the maxDistance is less than the current value of minDistance. If it is, the function updates the minDistance and optimalIndex variables to the current values of maxDistance and the index of the outer loop's block, respectively.
+
+Finally, after the outer loop finishes, the function returns the optimalIndex as the result.
+
